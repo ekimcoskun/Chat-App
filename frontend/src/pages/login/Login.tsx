@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Login = () => {
     return (
         <div className='flex justify-center flex-col items-center min-w-96 mx-auto'>
