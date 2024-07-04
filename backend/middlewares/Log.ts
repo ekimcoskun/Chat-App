@@ -12,7 +12,12 @@ class Log {
         let _dateString = `${this.today.getFullYear()}-${(this.today.getMonth() + 1)}-${this.today.getDate()}`;
         let _timeString = `${this.today.getHours()}:${this.today.getMinutes()}:${this.today.getSeconds()}`;
 
-        this.baseDir = path.join(__dirname, '../../.logs/');
+        this.baseDir = path.join(__dirname, '../.logs/');
+
+        // Create the log directory if it does not exist
+        if (!fs.existsSync(this.baseDir)) {
+            fs.mkdirSync(this.baseDir);
+        }
 
         this.fileName = `${_dateString}.log`;
         this.linePrefix = `[${_dateString} ${_timeString}]`;
