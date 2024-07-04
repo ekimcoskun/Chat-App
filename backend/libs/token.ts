@@ -6,7 +6,7 @@ import "dotenv/config";
 @injectable()
 export class Token implements IToken {
     async generateToken(payload: string | object): Promise<string> {
-        const token = await jwt.sign(payload, process.env.SECRET_KEY as string, { expiresIn: "1h" });
+        const token = await jwt.sign(JSON.stringify(payload), process.env.SECRET_KEY as string);
         return token;
     }
     async verifyToken(token: string): Promise<string | object> {

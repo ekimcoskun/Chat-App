@@ -29,8 +29,8 @@ export class AuthController {
 
     async onRegister(req: Request, res: Response) {
         try {
-            const { name, email, password, phone } = req.body;
-            const result = await this.service.register(name, email, password, phone);
+            const { name, email, password, phoneNumber } = req.body;
+            const result = await this.service.register(name, email, password, phoneNumber);
             if (result) {
                 return res.status(201).json({ message: "User created successfully" });
             } else {
@@ -43,13 +43,8 @@ export class AuthController {
 
     async onLogout(req: Request, res: Response) {
         try {
-            const token = req.headers.authorization;
-            const result = await this.service.logout(token as string);
-            if (result) {
-                return res.status(200).json({ message: "User logged out successfully" });
-            } else {
-                return res.status(400).json({ message: "User not found" });
-            }
+            res.cookie("token", "", { maxAge: 0 });
+            return res.status(200).json({ message: "User logged out successfully" });
         } catch (err) {
             return res.status(500).json({ err });
         }

@@ -28,7 +28,6 @@ export class AuthService implements IAuthService {
         const user = await this.repository.login(email);
         if (user) {
             const isPasswordMatch = await this.hash.comparePassword(password, user.password);
-
             if (isPasswordMatch) {
                 const token = await this.token.generateToken(user);
                 return token;
@@ -41,7 +40,7 @@ export class AuthService implements IAuthService {
     }
     async register(name: string, email: string, password: string, phoneNumber: string): Promise<string> {
         const hashedPassword = await this.hash.hashPassword(password);
-        const user = await this.repository.register(name, email, password, phoneNumber);
+        const user = await this.repository.register(name, email, hashedPassword, phoneNumber);
         if (user) {
             return "User registered successfully";
         } else {
