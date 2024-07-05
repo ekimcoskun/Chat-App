@@ -28,10 +28,10 @@ export class MessageRepository implements IMessageRepository {
             receiverId,
             message,
         });
-        /* if (newMessage) {
-            conversation.messages.push(newMessage);
-        } */
-        console.log(5)
+        if (newMessage) {
+            conversation.messages.push(newMessage.id);
+        }
+
         return "Message sent";
     }
 
