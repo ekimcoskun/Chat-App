@@ -14,9 +14,9 @@ const SignUp = () => {
 
     const { loading, signup } = useSignup()
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        signup(formData)
+        await signup(formData)
     }
 
     return (
@@ -62,7 +62,8 @@ const SignUp = () => {
 
                     <div>
                         <button className='btn btn-block btn-sm mt-2'
-                            disabled={loading}>{loading ? <span className="loading loading-spinner" /> : "Sign Up"}</button>
+                            disabled={loading}>{loading ? <span className="loading loading-spinner" /> : "Sign Up"}
+                        </button>
                     </div>
                 </form>
             </div>

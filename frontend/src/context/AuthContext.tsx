@@ -3,7 +3,7 @@ import { IAuthContext } from "../interfaces/context/authContext";
 import { IAuthUser } from "../interfaces/context/authUser";
 
 
-export const AuthContext = createContext<IAuthContext | null>(null);
+export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 interface AuthContextProviderProps {
     children: ReactNode;
@@ -14,10 +14,7 @@ export const useAuthContext = () => {
 }
 
 export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ children }) => {
-    const [authUser, setAuthUser] = useState<IAuthUser | null>(() => {
-        const storedUser = localStorage.getItem('auth-user');
-        return storedUser ? JSON.parse(storedUser) : null;
-    });
+    const [authUser, setAuthUser] = useState<IAuthUser | null>(JSON.parse(localStorage.getItem("auth-user") || "null"));
 
     return (
         <AuthContext.Provider value={{ authUser, setAuthUser }}>
