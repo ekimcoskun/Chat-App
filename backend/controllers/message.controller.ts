@@ -13,10 +13,10 @@ export class MessageController {
         this.service = service;
     }
 
-    onSendMessage(req: Request, res: Response) {
+    async onSendMessage(req: Request, res: Response) {
         try {
             const { senderId, receiverId, message } = req.body;
-            this.service.sendMessage(senderId, receiverId, message)
+            await this.service.sendMessage(senderId, receiverId, message)
                 .then((result) => {
                     return res.status(201).json({ message: "Message sent successfully" });
                 })
@@ -28,10 +28,10 @@ export class MessageController {
         }
     }
 
-    onGetMessages(req: Request, res: Response) {
+    async onGetMessages(req: Request, res: Response) {
         try {
             const { senderId, receiverId } = req.body;
-            this.service.getMessages(senderId, receiverId)
+            await this.service.getMessages(senderId, receiverId)
                 .then((result) => {
                     return res.status(200).json({ messages: result });
                 })

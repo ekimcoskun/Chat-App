@@ -20,7 +20,7 @@ export class AuthService implements IAuthService {
         this.token = token;
         this.hash = hash;
     }
-    logout(token: string): Promise<string> {
+    async logout(token: string): Promise<string> {
         throw new Error("Method not implemented.");
     }
 

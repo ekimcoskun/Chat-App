@@ -11,10 +11,10 @@ export class UserController {
         this.service = service;
     }
 
-    onGetUsersByIds(req: Request, res: Response) {
+    async onGetUsersByIds(req: Request, res: Response) {
         try {
             const { userIds } = req.body;
-            this.service.getUsersByIds(userIds)
+            await this.service.getUsersByIds(userIds)
                 .then((result) => {
                     return res.status(200).json({ users: result });
                 })
@@ -26,9 +26,9 @@ export class UserController {
         }
     }
 
-    onGetAllUsers(req: Request, res: Response) {
+    async onGetAllUsers(req: Request, res: Response) {
         try {
-            this.service.getAllUsers()
+            await this.service.getAllUsers()
                 .then((result) => {
                     return res.status(200).json({ users: result });
                 })

@@ -11,12 +11,12 @@ export class UserService implements IUserService {
     constructor(@inject(INTERFACE_TYPE.UserRepository) repository: IUserRepository) {
         this.repository = repository;
     }
-    getAllUsers(): Promise<User[]> {
-        const users = this.repository.getAllUsers();
+    async getAllUsers(): Promise<User[]> {
+        const users = await this.repository.getAllUsers();
         return users;
     }
 
-    getUsersByIds(userIds: string[]): Promise<User[]> {
+    async getUsersByIds(userIds: string[]): Promise<User[]> {
         throw new Error("Method not implemented.");
     }
 
