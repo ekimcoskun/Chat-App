@@ -11,8 +11,8 @@ export class UserService implements IUserService {
     constructor(@inject(INTERFACE_TYPE.UserRepository) repository: IUserRepository) {
         this.repository = repository;
     }
-    async getAllUsers(): Promise<User[]> {
-        const users = await this.repository.getAllUsers();
+    async getAllUsers(searchText: string): Promise<User[]> {
+        const users = await this.repository.getAllUsers(searchText);
         return users;
     }
 

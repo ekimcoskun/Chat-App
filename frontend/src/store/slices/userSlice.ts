@@ -17,10 +17,10 @@ const initialState: IUserState = {
     users: [],
 };
 
-export const getAllUsers = createAsyncThunk<{ users: IUser[] }, void, { rejectValue: string }>(
+export const getAllUsers = createAsyncThunk<{ users: IUser[] }, string | undefined, { rejectValue: string }>(
     "userState/getAllUsers",
-    async () => {
-        const response = await axios.get(`${baseURL}/api/user/getAllUsers`, RequestConfig());
+    async (searchText?: string) => {
+        const response = await axios.get(`${baseURL}/api/user/getAllUsers?searchText=${searchText || ""}`, RequestConfig());
         return response.data;
     }
 )

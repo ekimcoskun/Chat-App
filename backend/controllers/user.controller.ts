@@ -28,7 +28,8 @@ export class UserController {
 
     async onGetAllUsers(req: Request, res: Response) {
         try {
-            await this.service.getAllUsers()
+            const { searchText } = req.query;
+            await this.service.getAllUsers(searchText as string)
                 .then((result) => {
                     return res.status(200).json({ users: result });
                 })

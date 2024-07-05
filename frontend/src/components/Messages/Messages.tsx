@@ -14,11 +14,16 @@ const Messages = () => {
     const loading = useSelector((state: RootState) => state.messageSlice.loading);
     const selectedConversation = useSelector((state: RootState) => state.messageSlice.selectedConversation);
     const { authUser } = useAuthContext();
-    console.log(messages)
 
     useEffect(() => {
         dispatch(getMessages({ senderId: authUser?._id, chatId: selectedConversation._id }))
     }, [selectedConversation._id])
+
+    useEffect(() => {
+        setTimeout(() => {
+            lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+    }, [messages])
 
     return (
         <div className='px-4 flex-1 overflow-auto'>

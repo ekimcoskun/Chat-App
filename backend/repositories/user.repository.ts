@@ -21,12 +21,23 @@ export class UserRepository implements IUserRepository {
         }
         return user;
     }
-    async getAllUsers(): Promise<User[]> {
-        const users = await UserModel.find();
-        if (!users) {
-            return [];
+    async getAllUsers(searchText: string): Promise<User[]> {
+        console.log(searchText)
+        if (searchText) {
+            const users = await UserModel.find({ name: { $regex: searchText, $options: "i" } });
+            console.log(users)
+            if (!users) {
+                return [];
+            } else {
+                return users;
+            }
         } else {
-            return users;
+            const users = await UserModel.find();
+            if (!users) {
+                return [];
+            } else {
+                return users;
+            }
         }
     }
     async deleteUser(id: string): Promise<string> {

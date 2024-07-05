@@ -16,7 +16,6 @@ export class MessageController {
     async onSendMessage(req: Request, res: Response) {
         try {
             const { user, receiverId, message } = req.body;
-            console.log("geldi")
             const result = await this.service.sendMessage(user, receiverId, message)
             if (result) {
                 return res.status(201).json({ message: "Message sent successfully" });
@@ -24,7 +23,6 @@ export class MessageController {
                 return res.status(400).json({ error: true, message: "Message could not be sent" });
             }
         } catch (err) {
-            console.log(err)
             return res.status(500).json({ err });
         }
     }
