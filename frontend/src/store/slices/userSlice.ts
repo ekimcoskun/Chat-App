@@ -8,7 +8,7 @@ import { IUser } from "../../interfaces/User";
 export interface IUserState {
     loading: boolean;
     message: string;
-    users: any[];
+    users: IUser[];
 }
 
 const initialState: IUserState = {
