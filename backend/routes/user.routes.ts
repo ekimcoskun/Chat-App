@@ -17,6 +17,6 @@ container.bind(INTERFACE_TYPE.UserController).to(UserController)
 
 const controller = container.get<UserController>(INTERFACE_TYPE.UserController);
 
-userRoutes.post("/getUsersByIds", controller.onGetUsersByIds.bind(controller));
+userRoutes.post("/getAllUsers", controller.onGetAllUsers.bind(controller));
 
 export default userRoutes;

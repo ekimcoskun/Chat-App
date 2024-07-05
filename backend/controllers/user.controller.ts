@@ -25,4 +25,18 @@ export class UserController {
             return res.status(500).json({ err });
         }
     }
+
+    onGetAllUsers(req: Request, res: Response) {
+        try {
+            this.service.getAllUsers()
+                .then((result) => {
+                    return res.status(200).json({ users: result });
+                })
+                .catch((err) => {
+                    return res.status(500).json({ err });
+                });
+        } catch (err) {
+            return res.status(500).json({ err });
+        }
+    }
 }
