@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
-import { IAuthUser } from "./authUser";
+import { IUser } from "../User";
 
 export interface IAuthContext {
-    authUser: IAuthUser | null;
-    setAuthUser: Dispatch<SetStateAction<IAuthUser | null>>;
+    authUser: IUser | null;
+    setAuthUser: Dispatch<SetStateAction<IUser | null>>;
 }

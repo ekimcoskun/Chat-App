@@ -11,7 +11,7 @@ export class MessageRepository implements IMessageRepository {
     }
 
     async sendMessage(user: User, receiverId: string, message: string): Promise<string> {
-        const senderId = user.id;
+        const senderId = user._id;
 
         let conversation = await Conversation.findOne({
             participants: { $all: [senderId, receiverId] },
@@ -28,11 +28,10 @@ export class MessageRepository implements IMessageRepository {
             receiverId,
             message,
         });
-
-        if (newMessage) {
-            conversation.messages.push(newMessage._id);
-        }
-
+        /* if (newMessage) {
+            conversation.messages.push(newMessage);
+        } */
+        console.log(5)
         return "Message sent";
     }
 
