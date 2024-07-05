@@ -17,4 +17,7 @@ container.bind(INTERFACE_TYPE.MessageController).to(MessageController);
 
 const controller = container.get<MessageController>(INTERFACE_TYPE.MessageController);
 
+messageRoutes.post("/send", controller.onSendMessage.bind(controller));
+messageRoutes.post("/get", controller.onGetMessages.bind(controller));
+
 export default messageRoutes;

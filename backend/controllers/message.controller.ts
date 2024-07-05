@@ -27,4 +27,19 @@ export class MessageController {
             return res.status(500).json({ err });
         }
     }
+
+    onGetMessages(req: Request, res: Response) {
+        try {
+            const { senderId, receiverId } = req.body;
+            this.service.getMessages(senderId, receiverId)
+                .then((result) => {
+                    return res.status(200).json({ messages: result });
+                })
+                .catch((err) => {
+                    return res.status(500).json({ err });
+                });
+        } catch (err) {
+            return res.status(500).json({ err });
+        }
+    }
 }

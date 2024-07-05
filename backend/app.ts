@@ -4,6 +4,7 @@ import { connect } from './helpers/connectDB';
 import Http from './middlewares/Http';
 import authRoutes from './routes/auth.routes';
 import messageRoutes from './routes/message.routes';
+import userRoutes from './routes/user.routes';
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes)
 app.use("/api/message", messageRoutes)
+app.use("/api/user", userRoutes)
 
 app.listen(3000, async () => {
     await connect();

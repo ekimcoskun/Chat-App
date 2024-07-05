@@ -3,6 +3,9 @@ import { IMessageRepository } from "../interfaces/Message/IMessageRepository";
 
 @injectable()
 export class MessageRepository implements IMessageRepository {
+    getMessages(senderId: string, receiverId: string): Promise<string[]> {
+        throw new Error("Method not implemented.");
+    }
 
     sendMessage(senderId: string, receiverId: string, message: string): Promise<string> {
         throw new Error("Method not implemented.");

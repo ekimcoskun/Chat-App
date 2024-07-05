@@ -44,4 +44,12 @@ export class UserRepository implements IUserRepository {
             return "User updated";
         }
     }
+    async getUsersByIds(ids: string[]): Promise<User[]> {
+        const users = await UserModel.find({ id: { $in: ids } });
+        if (!users) {
+            return [];
+        } else {
+            return users;
+        }
+    }
 }

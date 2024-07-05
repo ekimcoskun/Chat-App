@@ -1,8 +1,10 @@
 
 export const INTERFACE_TYPE = {
     AuthService: Symbol.for("IAuthService"),
-    UserRepository: Symbol.for("IUserRepository"),
     AuthController: Symbol.for("IAuthController"),
+    UserRepository: Symbol.for("IUserRepository"),
+    UserService: Symbol.for("IUserService"),
+    UserController: Symbol.for("IUserController"),
     MessageRepository: Symbol.for("IMessageRepository"),
     MessageService: Symbol.for("IMessageService"),
     MessageController: Symbol.for("IMessageController"),

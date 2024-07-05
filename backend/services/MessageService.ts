@@ -11,6 +11,9 @@ export class MessageService implements IMessageService {
     constructor(@inject(INTERFACE_TYPE.MessageRepository) repository: IMessageRepository) {
         this.repository = repository;
     }
+    getMessages(senderId: string, receiverId: string): Promise<string[]> {
+        throw new Error("Method not implemented.");
+    }
 
     sendMessage(senderId: string, receiverId: string, message: string): Promise<string> {
         throw new Error("Method not implemented.");
