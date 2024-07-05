@@ -24,13 +24,13 @@ export class AuthService implements IAuthService {
         throw new Error("Method not implemented.");
     }
 
-    async login(email: string, password: string): Promise<string> {
+    async login(email: string, password: string): Promise<{ user: User, token: string }> {
         const user = await this.repository.login(email);
         if (user) {
             const isPasswordMatch = await this.hash.comparePassword(password, user.password);
             if (isPasswordMatch) {
                 const token = await this.token.generateToken(user);
-                return token;
+                return { token, user };
             } else {
                 throw new Error("Invalid email or password");
             }

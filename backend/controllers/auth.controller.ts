@@ -15,9 +15,9 @@ export class AuthController {
     async onLogin(req: Request, res: Response) {
         try {
             const { email, password } = req.body;
-            const token = await this.service.login(email, password);
-            if (token) {
-                return res.status(200).json({ token });
+            const data = await this.service.login(email, password);
+            if (data.token) {
+                return res.status(200).json({ data });
             } else {
                 return res.status(401).json({ message: "Invalid email or password" });
             }
