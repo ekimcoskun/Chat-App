@@ -19,10 +19,10 @@ export class AuthController {
             if (data.token) {
                 return res.status(200).json({ data });
             } else {
-                return res.status(401).json({ message: "Invalid email or password" });
+                return res.status(401).json({ error: true, message: "Invalid email or password" });
             }
-        } catch (err) {
-            return res.status(500).json({ err });
+        } catch (error) {
+            return res.status(500).json({ error });
         }
 
     }
@@ -34,10 +34,10 @@ export class AuthController {
             if (result) {
                 return res.status(201).json({ message: "User created successfully", user: result });
             } else {
-                return res.status(400).json({ message: "User already exists" });
+                return res.status(400).json({ error: true, message: "User already exists" });
             }
-        } catch (err) {
-            return res.status(500).json({ err });
+        } catch (error) {
+            return res.status(500).json({ error });
         }
     }
 
@@ -45,8 +45,8 @@ export class AuthController {
         try {
             res.cookie("token", "", { maxAge: 0 });
             return res.status(200).json({ message: "User logged out successfully" });
-        } catch (err) {
-            return res.status(500).json({ err });
+        } catch (error) {
+            return res.status(500).json({ error });
         }
     }
 }

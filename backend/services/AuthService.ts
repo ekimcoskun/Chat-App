@@ -32,7 +32,7 @@ export class AuthService implements IAuthService {
                 const token = await this.token.generateToken(user);
                 return { token, user };
             } else {
-                throw new Error("Invalid email or password");
+                return { token: "", user }
             }
         } else {
             throw new Error("User not found");

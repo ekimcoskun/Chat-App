@@ -23,6 +23,6 @@ const controller = container.get<AuthController>(INTERFACE_TYPE.AuthController);
 
 authRoutes.post("/login", controller.onLogin.bind(controller));
 authRoutes.post("/register", controller.onRegister.bind(controller));
-authRoutes.get("/logout", controller.onLogout.bind(controller));
+authRoutes.post("/logout", controller.onLogout.bind(controller));
 
 export default authRoutes;
