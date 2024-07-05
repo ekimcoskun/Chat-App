@@ -2,6 +2,9 @@ import { useState } from "react"
 import { ILoginForm } from "../interfaces/forms/loginForm"
 import { useAuthContext } from "../context/AuthContext"
 import toast from "react-hot-toast"
+import { baseURL } from "../configurations/environment"
+import axios from "axios"
+import { RequestConfig } from "../helpers/requestConfig"
 
 const useLogin = () => {
     const [loading, setLoading] = useState<boolean>(false)
@@ -12,20 +15,13 @@ const useLogin = () => {
         if (!success) return;
         setLoading(true);
         try {
-            const response = await fetch('/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(loginForm)
-            });
+            const response = await axios.post(`${baseURL}/api/auth/login`, loginForm, RequestConfig());
 
-            const data = await response.json();
-            if (data.error) {
-                throw new Error(data.message);
+            if (response.data.error) {
+                throw new Error(response.data.message);
             }
-            localStorage.setItem("auth-user", JSON.stringify(data?.data?.user));
-            setAuthUser(data?.data?.user);
+            localStorage.setItem("auth-user", JSON.stringify(response?.data?.data.user));
+            setAuthUser(response?.data?.data.user);
         } catch (error: any) {
             toast.error(error.message || error || "An error occurred");
         } finally {
