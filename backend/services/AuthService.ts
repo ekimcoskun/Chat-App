@@ -38,11 +38,11 @@ export class AuthService implements IAuthService {
             throw new Error("User not found");
         }
     }
-    async register(name: string, email: string, password: string, phoneNumber: string): Promise<string> {
+    async register(name: string, email: string, password: string, phoneNumber: string): Promise<User> {
         const hashedPassword = await this.hash.hashPassword(password);
         const user = await this.repository.register(name, email, hashedPassword, phoneNumber);
         if (user) {
-            return "User registered successfully";
+            return user;
         } else {
             throw new Error("User not registered");
         }

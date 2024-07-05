@@ -32,7 +32,7 @@ export class AuthController {
             const { name, email, password, phoneNumber } = req.body;
             const result = await this.service.register(name, email, password, phoneNumber);
             if (result) {
-                return res.status(201).json({ message: "User created successfully" });
+                return res.status(201).json({ message: "User created successfully", user: result });
             } else {
                 return res.status(400).json({ message: "User already exists" });
             }

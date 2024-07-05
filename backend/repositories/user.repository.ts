@@ -13,13 +13,13 @@ export class UserRepository implements IUserRepository {
             return user;
         }
     }
-    async register(name: string, email: string, password: string, phoneNumber: string): Promise<string> {
+    async register(name: string, email: string, password: string, phoneNumber: string): Promise<User> {
         const user = new UserModel({ name, email, password, phoneNumber });
         const result = await user.save();
         if (!result) {
             throw new Error("User not created");
         }
-        return "User created";
+        return user;
     }
     async getAllUsers(): Promise<User[]> {
         const users = await UserModel.find();
