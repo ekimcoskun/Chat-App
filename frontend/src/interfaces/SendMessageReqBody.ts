@@ -1,6 +1,6 @@
 import { IUser } from "./User";
 
-export interface ISendMessageBody {
+export interface ISendMessageReqBody {
     message: string;
     receiverId: string;
     user: IUser;

@@ -8,12 +8,13 @@ import { Message as MessageEntity } from "../entities/Message";
 @injectable()
 export class MessageRepository implements IMessageRepository {
     async getMessages(senderId: string, chatId: string): Promise<MessageEntity[]> {
+        console.log()
         const conversation = await Conversation.findOne({
             participants: { $all: [senderId, chatId] },
         }).populate("messages");
-
+        console.log(conversation)
         if (!conversation) {
-            throw new Error("Conversation not found");
+            return [];
         }
 
         return conversation.messages;
@@ -40,6 +41,12 @@ export class MessageRepository implements IMessageRepository {
         if (newMessage) {
             conversation.messages.push(newMessage.id);
         }
+
+        await conversation.save();
+        await newMessage.save();
+
+        // this will run in parallel
+        await Promise.all([conversation.save(), newMessage.save()]);
 
         return "Message sent";
     }

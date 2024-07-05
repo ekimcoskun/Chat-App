@@ -3,13 +3,15 @@ import { IUser } from "../../interfaces/User";
 import axios from "axios";
 import { baseURL } from "../../configurations/environment";
 import { RequestConfig } from "../../helpers/requestConfig";
-import { ISendMessageBody } from "../../interfaces/SendMessageBody";
+import { ISendMessageReqBody } from "../../interfaces/SendMessageReqBody";
 import toast from "react-hot-toast";
+import { IGetMessageReqBody } from "../../interfaces/GetMessageReqBody";
+import { IMessage } from "../../interfaces/Message";
 
 export interface IMessageState {
     sendMessageLoading: boolean;
     loading: boolean;
-    messages: any[];
+    messages: IMessage[];
     selectedConversation: IUser;
 }
 
@@ -20,14 +22,25 @@ const initialState: IMessageState = {
     selectedConversation: {} as IUser,
 };
 
-export const sendMessage = createAsyncThunk<ISendMessageBody, ISendMessageBody, { rejectValue: string }>(
+export const sendMessage = createAsyncThunk<ISendMessageReqBody, ISendMessageReqBody, { rejectValue: string }>(
     "messageState/sendMessage",
-    async (formData: ISendMessageBody) => {
+    async (formData: ISendMessageReqBody) => {
         try {
             const response = await axios.post(`${baseURL}/api/message/send`, formData, RequestConfig());
             return response.data;
         } catch (error: any) {
             toast.error("Failed to send message. Please try again later.");
+        }
+    });
+
+export const getMessages = createAsyncThunk<any, any, { rejectValue: string }>(
+    "messageState/getMessages",
+    async (formData: IGetMessageReqBody) => {
+        try {
+            const response = await axios.post(`${baseURL}/api/message/get`, formData, RequestConfig());
+            return response.data.data;
+        } catch (error: any) {
+            toast.error("Failed to fetch messages. Please try again later.");
         }
     });
 
@@ -46,6 +59,13 @@ export const messageSlice = createSlice({
             state.sendMessageLoading = true;
         }).addCase(sendMessage.rejected, (state) => {
             state.sendMessageLoading = false;
+        }).addCase(getMessages.fulfilled, (state, action) => {
+            state.messages = action.payload;
+            state.loading = false;
+        }).addCase(getMessages.pending, (state) => {
+            state.loading = true;
+        }).addCase(getMessages.rejected, (state) => {
+            state.loading = false;
         });
     }
 });

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { sendMessage } from '../../store/slices/messageSlice';
 import { useAuthContext } from '../../context/AuthContext';
 import { useState } from 'react';
-import { ISendMessageBody } from '../../interfaces/SendMessageBody';
+import { ISendMessageReqBody } from '../../interfaces/SendMessageReqBody';
 
 const MessageInput = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -21,7 +21,7 @@ const MessageInput = () => {
             message: messageText,
             receiverId: selectedConversation._id,
             user: authUser
-        } as ISendMessageBody));
+        } as ISendMessageReqBody));
         setMessageText('');
     };
 
