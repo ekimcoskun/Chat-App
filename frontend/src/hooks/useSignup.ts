@@ -1,9 +1,11 @@
 import { useState } from "react"
 import { IRegisterForm } from "../interfaces/forms/registerForm";
 import toast from "react-hot-toast";
+import { useAuthContext } from "../context/AuthContext";
 
 const useSignup = () => {
     const [loading, setLoading] = useState<boolean>(false);
+    const { setAuthUser } = useAuthContext();
 
     const signup = async (formData: IRegisterForm) => {
         const success = handleInputErrors(formData);
@@ -22,8 +24,11 @@ const useSignup = () => {
             if (data.error) {
                 throw new Error(data.error);
             }
+
+            localStorage.setItem("auth-user", JSON.stringify(data.user));
+            setAuthUser(data.user);
         } catch (error: any) {
-            toast.error(error.message);
+            toast.error(error.message || error);
         } finally {
             setLoading(false);
         }
