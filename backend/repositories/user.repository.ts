@@ -22,10 +22,8 @@ export class UserRepository implements IUserRepository {
         return user;
     }
     async getAllUsers(searchText: string): Promise<User[]> {
-        console.log(searchText)
         if (searchText) {
             const users = await UserModel.find({ name: { $regex: searchText, $options: "i" } });
-            console.log(users)
             if (!users) {
                 return [];
             } else {
