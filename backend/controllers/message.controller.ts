@@ -31,16 +31,15 @@ export class MessageController {
 
     async onGetMessages(req: Request, res: Response) {
         try {
-            const { senderId, receiverId } = req.body;
-            await this.service.getMessages(senderId, receiverId)
-                .then((result) => {
-                    return res.status(200).json({ messages: result });
-                })
-                .catch((err) => {
-                    return res.status(500).json({ err });
-                });
+            const { senderId, chatId } = req.body;
+            const result = await this.service.getMessages(senderId, chatId)
+            if (result) {
+                return res.status(200).json({ data: result });
+            } else {
+                return res.status(400).json({ error: true, message: "Messages could not be fetched", data: [] });
+            }
         } catch (err) {
-            return res.status(500).json({ err });
+            return res.status(500).json({ err, data: [] });
         }
     }
 }
