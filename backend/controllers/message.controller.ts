@@ -18,7 +18,7 @@ export class MessageController {
             const { user, receiverId, message } = req.body;
             const result = await this.service.sendMessage(user, receiverId, message)
             if (result) {
-                return res.status(201).json({ message: "Message sent successfully" });
+                return res.status(201).json({ message: "Message sent successfully", data: result });
             } else {
                 return res.status(400).json({ error: true, message: "Message could not be sent" });
             }

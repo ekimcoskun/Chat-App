@@ -5,10 +5,13 @@ import Http from './middlewares/Http';
 import authRoutes from './routes/auth.routes';
 import messageRoutes from './routes/message.routes';
 import userRoutes from './routes/user.routes';
-import { app, server } from './socket/socket';
 import "dotenv/config";
+import { socketService } from './config/inversify.socketConfig';
 
 const PORT = process.env.PORT || 3000;
+
+const app = socketService.app;
+const server = socketService.server;
 
 Http.mount(app);
 

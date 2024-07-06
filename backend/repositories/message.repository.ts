@@ -18,7 +18,7 @@ export class MessageRepository implements IMessageRepository {
         return conversation.messages;
     }
 
-    async sendMessage(user: User, receiverId: string, message: string): Promise<string> {
+    async sendMessage(user: User, receiverId: string, message: string): Promise<MessageEntity> {
         const senderId = user._id;
 
         let conversation = await Conversation.findOne({
@@ -46,7 +46,7 @@ export class MessageRepository implements IMessageRepository {
         // this will run in parallel
         await Promise.all([conversation.save(), newMessage.save()]);
 
-        return "Message sent";
+        return newMessage;
     }
 
 }
