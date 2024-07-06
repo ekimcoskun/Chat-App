@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { sendMessage } from '../../store/slices/messageSlice';
 import { useAuthContext } from '../../context/AuthContext';
 import { useState } from 'react';
-import { ISendMessageReqBody } from '../../interfaces/SendMessageReqBody';
+import { ISendMessageReqBody } from '../../interfaces/SendMessage';
 
 const MessageInput = () => {
     const dispatch: AppDispatch = useDispatch();

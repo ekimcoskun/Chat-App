@@ -3,7 +3,7 @@ import { IUser } from "../../interfaces/User";
 import axios from "axios";
 import { baseURL } from "../../configurations/environment";
 import { RequestConfig } from "../../helpers/requestConfig";
-import { ISendMessageReqBody } from "../../interfaces/SendMessageReqBody";
+import { ISendMessageReqBody, ISendMessageResBody } from "../../interfaces/SendMessage";
 import toast from "react-hot-toast";
 import { IGetMessageReqBody } from "../../interfaces/GetMessageReqBody";
 import { IMessage } from "../../interfaces/Message";
@@ -22,7 +22,7 @@ const initialState: IMessageState = {
     selectedConversation: {} as IUser,
 };
 
-export const sendMessage = createAsyncThunk<ISendMessageReqBody, ISendMessageReqBody, { rejectValue: string }>(
+export const sendMessage = createAsyncThunk<ISendMessageResBody, ISendMessageReqBody, { rejectValue: string }>(
     "messageState/sendMessage",
     async (formData: ISendMessageReqBody) => {
         try {
@@ -53,8 +53,9 @@ export const messageSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(sendMessage.fulfilled, (state) => {
+        builder.addCase(sendMessage.fulfilled, (state, action) => {
             state.sendMessageLoading = false;
+            state.messages = [...state.messages, action.payload.data]
         }).addCase(sendMessage.pending, (state) => {
             state.sendMessageLoading = true;
         }).addCase(sendMessage.rejected, (state) => {
