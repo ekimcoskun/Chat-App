@@ -6,12 +6,12 @@ import authRoutes from './routes/auth.routes';
 import messageRoutes from './routes/message.routes';
 import userRoutes from './routes/user.routes';
 import "dotenv/config";
-import { socketService } from './config/inversify.socketConfig';
+import { app, server } from './socket/socket';
 
 const PORT = process.env.PORT || 3000;
 
-const app = socketService.app;
-const server = socketService.server;
+/* const app = socketService.app;
+const server = socketService.server; */
 
 Http.mount(app);
 

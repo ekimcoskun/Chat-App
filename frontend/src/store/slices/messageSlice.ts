@@ -51,6 +51,9 @@ export const messageSlice = createSlice({
         setSelectedConversation: (state, action) => {
             state.selectedConversation = action.payload;
         },
+        setMessages: (state, action) => {
+            state.messages = action.payload;
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(sendMessage.fulfilled, (state, action) => {
@@ -71,5 +74,5 @@ export const messageSlice = createSlice({
     }
 });
 
-export const { setSelectedConversation } = messageSlice.actions;
+export const { setSelectedConversation, setMessages } = messageSlice.actions;
 export default messageSlice.reducer;

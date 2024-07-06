@@ -6,6 +6,7 @@ import { useEffect, useRef } from 'react'
 import { getMessages } from '../../store/slices/messageSlice'
 import { useAuthContext } from '../../context/AuthContext'
 import MessageSkeleton from '../Sekeletons/MessageSkeletons'
+import useListenMessages from '../../hooks/useListenMessages'
 
 const Messages = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -14,6 +15,7 @@ const Messages = () => {
     const loading = useSelector((state: RootState) => state.messageSlice.loading);
     const selectedConversation = useSelector((state: RootState) => state.messageSlice.selectedConversation);
     const { authUser } = useAuthContext();
+    useListenMessages();
 
     useEffect(() => {
         dispatch(getMessages({ senderId: authUser?._id, chatId: selectedConversation._id }))

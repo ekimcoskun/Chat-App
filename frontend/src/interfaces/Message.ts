@@ -7,4 +7,5 @@ export interface IMessage {
     message: string;
     createdAt: Date;
     updataedAt: Date;
+    shake?: boolean;
 }
