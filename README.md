@@ -32,3 +32,4 @@ Before you begin, ensure you have Node.js installed on your machine.
 |MongoDB - Mongoose              |TailwindCSS - Daisy UI           |
 |Socket.io                       |Vite                             |
 |Inversify                       |Axios                            |
+|Bcrypt                          |Speech Recognition API           |
